@@ -54,13 +54,10 @@ there should be `Javobingiz to'g'ri: ` and step-by-step guide for right answer.
 `Tabriklayman, keyingi bosqichga o'tdingiz.`
 Button for continuation `Davom etish`
 When the button is pressed, try count is set to zero and level is increased by 1.
+When user answers all level questions right, message is:
+`Tabriklayman:
+ Siz ushbu mavzuni o'zlashtirdingiz!`
 
-
-
-
-
-
-
-
-try count, level and user info should be persisted across refreshes or new visiting to site.
+try count, level and user info (firstname, lastname and password) should be persisted across refreshes or new visits to site.
+We can implement dark and light theme easily with tailwind, right?
 The first thing we have to do for now is form UI for it and we can develop other things later.
