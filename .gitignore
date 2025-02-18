@@ -24,4 +24,5 @@ dist-ssr
 *.sw?
 
 # NeoVim
+scratch
 server exited unexpectedly

@@ -1,41 +1,80 @@
-export default function HeroSection() {
+import { useState, useEffect } from "react";
+import Matrix from "./components/Matrix";
+
+export default function DeterminantGame() {
+    const [level, setLevel] = useState(1);
+    const [tryCount, setTryCount] = useState(0);
+    const [matrix, setMatrix] = useState([]);
+    const [userAnswer, setUserAnswer] = useState("");
+    const [message, setMessage] = useState("");
+
+    useEffect(() => {
+        generateMatrix();
+    }, [level]);
+
+    function generateMatrix() {
+        let size = level + 1;
+        let newMatrix = Array.from(
+            { length: size * size },
+            () => Math.floor(Math.random() * 199) - 99,
+        );
+        setMatrix(newMatrix);
+    }
+
+    function handleSubmit() {
+        let correctAnswer = "?";
+        if (userAnswer == correctAnswer) {
+            setMessage("✅ Javobingiz to'g'ri!");
+            setLevel((prev) => prev + 1);
+            setTryCount(0);
+        } else {
+            setMessage("❌ Javobingiz noto'g'ri!");
+            setTryCount((prev) => prev + 1);
+            if (tryCount + 1 >= 3) {
+                setMessage(
+                    "Sizga ushbu mavzuni qayta o'rganishni tavsiya qilaman!",
+                );
+            }
+        }
+    }
+
     return (
-        <div className="relative min-h-[932px] w-full overflow-hidden bg-black">
-            {/* Gradient background */}
+        <div className="relative min-h-screen w-full overflow-hidden bg-black p-8">
+            {/* gradient background */}
             <div className="absolute inset-0">
-                <div className="absolute left-0 top-0 h-[600px] w-[600px] -translate-x-1/4 -translate-y-1/4 bg-purple-500/30 blur-[100px]" />
-                <div className="absolute right-0 top-0 h-[600px] w-[600px] translate-x-1/4 -translate-y-1/4 bg-blue-500/30 blur-[100px]" />
+                <div className="absolute left-0 top-0 h-[700px] w-[700px] bg-purple-500/30 blur-[100px] translate-x-1/4 translate-y-1/4"></div>
+                <div className="absolute right-0 top-0 h-[600px] w-[700px] bg-blue-500/30 blur-[100px] translate-x-1/4 translate-y-1/4"></div>
+                <div className="absolute left-170 bottom-0 h-[600px] w-[700px] bg-yellow-500/30 blur-[100px] translate-x-1/4 translate-y-1/4"></div>
             </div>
 
-            {/* Content */}
-            <div className="relative flex min-h-[400px] items-center justify-center">
-                <div className="flex items-center gap-3">
-                    {/* Logo */}
-                    <div className="rounded bg-sky-400/90 p-2">
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            className="h-8 w-8 text-black"
-                            strokeWidth="2"
-                        >
-                            <rect x="4" y="4" width="16" height="16" rx="2" />
-                            <path d="M4 9h16" />
-                        </svg>
+            {/* content */}
+            <div className="relative flex flex-col items-center justify-center p-4 text-white text-center">
+                {/* welcome message */}
+                <h1 className="text-5xl font-bold">
+                    Determinantlarni hisoblashni o`rganamiz
+                </h1>
+                <h1 className="text-3xl font-semibold">
+                    INTERFAOL O`YINGA XUSH KELIBSIZ!!!
+                </h1>
+
+                <div className="flex justify-between w-full px-100 mt-10">
+                    {/* level */}
+                    <div className="mt-5 py-5 px-10 text-2xl font-bold rounded-xl shadow-md shadow-purple-50 bg-blue-500/50">
+                        {level} - bosqich
                     </div>
 
-                    <div className="flex items-center gap-3">
-                        {/* Text */}
-                        <h1 className="text-4xl font-semibold text-white">
-                            Bismillah
-                        </h1>
+                    {/* game command */}
+                    <h1 className="mt-10 text-2xl font-semibold">
+                        {level + 1} - tartibli determinantni hisoblang 👇
+                    </h1>
 
-                        {/* Version badge */}
-                        <div className="rounded-full bg-slate-800/60 px-3 py-1 text-sm text-white backdrop-blur-sm">
-                            v2.0
-                        </div>
+                    {/* try count */}
+                    <div className="mt-5 py-5 px-10 text-2xl font-bold rounded-xl shadow-md shadow-blue-50 bg-purple-500/50">
+                        {tryCount + 1} - urinish
                     </div>
                 </div>
+
+                <Matrix matrix={matrix} />
             </div>
         </div>
     );
