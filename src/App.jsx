@@ -3,39 +3,51 @@ import Matrix from "./components/Matrix";
 import GradientBackground from "./components/GradientBackground";
 import Header from "./components/Header";
 import UserAnswer from "./components/UserAnswer";
+import MessageComponent from "./components/MessageComponent.jsx";
+import { generateDeterminantProblem } from "./utils/matrixUtils.js";
+import { toast } from "react-toastify";
 
 export default function DeterminantGame() {
     const [level, setLevel] = useState(1);
     const [tryCount, setTryCount] = useState(0);
+    const [correctAnswer, setCorrectAnswer] = useState(0);
     const [matrix, setMatrix] = useState([]);
     const [userAnswer, setUserAnswer] = useState("");
-    const [message, setMessage] = useState("");
 
     useEffect(() => {
-        generateMatrix();
+        const problem = generateDeterminantProblem(level);
+        setMatrix(problem.matrix);
+        setCorrectAnswer(problem.answer.toString());
+        setUserAnswer("");
     }, [level]);
 
-    function generateMatrix() {
-        let size = level + 1;
-        let newMatrix = Array.from(
-            { length: size * size },
-            () => Math.floor(Math.random() * 199) - 99,
-        );
-        setMatrix(newMatrix);
-    }
-
     function handleSubmit() {
-        let correctAnswer = "?";
         if (userAnswer == correctAnswer) {
-            setMessage("✅ Javobingiz to'g'ri!");
             setLevel((prev) => prev + 1);
             setTryCount(0);
+            toast.success(
+                <>
+                    ✅ Javobingiz to`g`ri! <br /> Siz {level + 1}-bosqichga
+                    o`tdingiz
+                </>,
+            );
         } else {
-            setMessage("❌ Javobingiz noto'g'ri!");
             setTryCount((prev) => prev + 1);
+
             if (tryCount + 1 >= 3) {
-                setMessage(
-                    "Sizga ushbu mavzuni qayta o'rganishni tavsiya qilaman!",
+                toast.error(
+                    <>
+                        ❌ Bergan javoblaringiz noto`g`ri! <br />
+                        Sizga ushbu mavzuni qayta o`rganishni tavsiya qilaman!
+                    </>,
+                );
+            } else {
+                toast.error(
+                    <>
+                        ❌ Javobingiz noto`g`ri!
+                        <br />
+                        Sizda yana {3 - tryCount} ta urinish qoldi
+                    </>,
                 );
             }
         }
@@ -51,7 +63,9 @@ export default function DeterminantGame() {
                 <UserAnswer
                     userAnswer={userAnswer}
                     setUserAnswer={setUserAnswer}
+                    handleSubmit={handleSubmit}
                 />
+                {/* <MessageComponent message={"Bismillah"} /> */}
             </div>
         </div>
     );
