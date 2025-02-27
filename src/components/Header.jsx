@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function Header({ level, tryCount }) {
     return (
         <>
@@ -27,3 +29,8 @@ export default function Header({ level, tryCount }) {
         </>
     );
 }
+
+Header.propTypes = {
+    level: PropTypes.number.isRequired,
+    tryCount: PropTypes.number.isRequired,
+};

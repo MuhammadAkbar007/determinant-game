@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 
 export default function UserAnswer({
@@ -37,3 +38,9 @@ export default function UserAnswer({
         </div>
     );
 }
+
+UserAnswer.propTypes = {
+    userAnswer: PropTypes.string,
+    setUserAnswer: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+};

@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function Matrix({ matrix }) {
     // Check if matrix exists and is a 2D array
     if (!matrix || !matrix.length) {
@@ -49,3 +51,7 @@ export default function Matrix({ matrix }) {
         </div>
     );
 }
+
+Matrix.propTypes = {
+    matrix: PropTypes.array.isRequired,
+};
