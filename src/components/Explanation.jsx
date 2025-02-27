@@ -6,6 +6,10 @@ import {
 } from "../utils/matrixUtils";
 
 export default function Explanation({ matrix, correctAnswer }) {
+    const formatNumber = (num) => {
+        return num < 0 ? `(${num})` : num;
+    };
+
     // If no matrix is provided, show a loading message
     if (!matrix || !matrix.length) {
         return (
@@ -32,7 +36,7 @@ export default function Explanation({ matrix, correctAnswer }) {
                 <div className="mb-6 text-xl">
                     <p>2×2 matritsa uchun determinant formulasi:</p>
                     <div className="my-4 font-mono">det(A) = a×d - b×c</div>
-                    <p>Bu erda:</p>
+                    <p>Bu yerda:</p>
                     <div className="grid grid-cols-2 gap-4 my-4 text-center">
                         <div>a = {a}</div>
                         <div>b = {b}</div>
@@ -44,10 +48,11 @@ export default function Explanation({ matrix, correctAnswer }) {
                 <h2 className="text-2xl font-bold mb-4">Hisoblash</h2>
                 <div className="text-xl">
                     <p className="mb-2">
-                        det(A) = {a} × {d} - {b} × {c}
+                        det(A) = {formatNumber(a)} × {formatNumber(d)} -{" "}
+                        {formatNumber(b)} × {formatNumber(c)}
                     </p>
                     <p className="mb-2">
-                        det(A) = {a * d} - {b * c}
+                        det(A) = {formatNumber(a * d)} - {formatNumber(b * c)}
                     </p>
                     <p className="font-bold mb-2">det(A) = {a * d - b * c}</p>
                 </div>
@@ -89,7 +94,7 @@ export default function Explanation({ matrix, correctAnswer }) {
                         det(A) = a₁₁×M₁₁ - a₁₂×M₁₂ + a₁₃×M₁₃
                     </div>
                     <p>
-                        Bu erda M₁ᵢ - minor determinantlar (2×2 determinantlar)
+                        Bu yerda M₁ᵢ - minor determinantlar (2×2 determinantlar)
                     </p>
                 </div>
 
@@ -101,7 +106,7 @@ export default function Explanation({ matrix, correctAnswer }) {
                             className="border border-white/30 p-4 rounded-lg"
                         >
                             <p className="mb-2 font-semibold">
-                                {cf.sign > 0 ? "+" : "-"} {Math.abs(cf.value)} ×
+                                {cf.sign > 0 ? "" : "-"} {Math.abs(cf.value)} ×
                                 Minor{index + 1}:
                             </p>
 
@@ -114,21 +119,24 @@ export default function Explanation({ matrix, correctAnswer }) {
 
                             <p className="mb-1">
                                 Minor{index + 1} = {cf.subMatrix[0][0]} ×{" "}
-                                {cf.subMatrix[1][1]} - {cf.subMatrix[0][1]} ×{" "}
-                                {cf.subMatrix[1][0]}
+                                {formatNumber(cf.subMatrix[1][1])} -{" "}
+                                {formatNumber(cf.subMatrix[0][1])} ×{" "}
+                                {formatNumber(cf.subMatrix[1][0])}
                             </p>
                             <p className="mb-1">
                                 Minor{index + 1} ={" "}
                                 {cf.subMatrix[0][0] * cf.subMatrix[1][1]} -{" "}
-                                {cf.subMatrix[0][1] * cf.subMatrix[1][0]}
+                                {formatNumber(
+                                    cf.subMatrix[0][1] * cf.subMatrix[1][0],
+                                )}
                             </p>
                             <p className="mb-1">
                                 Minor{index + 1} = {cf.minorDet}
                             </p>
                             <p className="font-bold">
                                 Term{index + 1} = {cf.sign > 0 ? "" : "-"}
-                                {Math.abs(cf.value)} × {cf.minorDet} ={" "}
-                                {cf.result}
+                                {Math.abs(cf.value)} ×{" "}
+                                {formatNumber(cf.minorDet)} = {cf.result}
                             </p>
                         </div>
                     ))}
@@ -177,7 +185,7 @@ export default function Explanation({ matrix, correctAnswer }) {
                         det(A) = a₁₁×M₁₁ - a₁₂×M₁₂ + a₁₃×M₁₃ - a₁₄×M₁₄
                     </div>
                     <p>
-                        Bu erda M₁ᵢ - minor determinantlar (3×3 determinantlar)
+                        Bu yerda M₁ᵢ - minor determinantlar (3×3 determinantlar)
                     </p>
                 </div>
 
@@ -194,7 +202,7 @@ export default function Explanation({ matrix, correctAnswer }) {
                             className="border border-white/30 p-4 rounded-lg"
                         >
                             <p className="mb-2 font-semibold">
-                                {cf.sign > 0 ? "+" : "-"} {Math.abs(cf.value)} ×
+                                {cf.sign > 0 ? "" : "-"} {Math.abs(cf.value)} ×
                                 Minor{index + 1}
                             </p>
                             <p className="mb-1">

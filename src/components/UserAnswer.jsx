@@ -31,7 +31,7 @@ export default function UserAnswer({
             <button
                 disabled={!userAnswer}
                 onClick={handleSubmit}
-                className="bg-yellow-500 px-4 py-2 text-black font-extrabold rounded-md bg-opacity-50 border shadow-sm shadow-yellow-500 disabled:bg-white/50 hover:bg-yellow-600"
+                className="bg-yellow-500 px-4 py-2 text-black font-extrabold rounded-md border shadow-sm shadow-yellow-500 disabled:bg-white/50 hover:bg-yellow-600"
             >
                 Tekshirish
             </button>

@@ -6,17 +6,20 @@ import UserAnswer from "./components/UserAnswer";
 import { generateDeterminantProblem } from "./utils/matrixUtils.js";
 import { toast } from "react-toastify";
 import Explanation from "./components/Explanation.jsx";
+import Continue from "./components/Continue.jsx";
 
-export default function DeterminantGame() {
+export default function App() {
+    const [matrix, setMatrix] = useState([]);
     const [level, setLevel] = useState(1);
     const [tryCount, setTryCount] = useState(0);
     const [correctAnswer, setCorrectAnswer] = useState(0);
-    const [matrix, setMatrix] = useState([]);
-    const [userAnswer, setUserAnswer] = useState("");
     const [isExplained, setExplained] = useState(false);
     const [isTimedOut, setIsTimedOut] = useState(false);
+    const [isContinued, setIsContinued] = useState(false);
+    const [isFinished, setIsFinished] = useState(false);
     const [timeoutEndTime, setTimeoutEndTime] = useState(null);
     const [timeRemaining, setTimeRemaining] = useState("");
+    const [userAnswer, setUserAnswer] = useState("");
 
     useEffect(() => {
         const problem = generateDeterminantProblem(level);
@@ -64,24 +67,22 @@ export default function DeterminantGame() {
         };
     }, [isTimedOut, timeoutEndTime]);
 
+    function handleContinue() {
+        setIsContinued(false);
+        setLevel((prev) => prev + 1);
+        setTryCount(0);
+        toast.info(`${level + 1}-bosqichga o'tdingiz`);
+    }
+
     function handleSubmit() {
         if (userAnswer == correctAnswer) {
             if (level < 3) {
-                setLevel((prev) => prev + 1);
-                setTryCount(0);
-
-                toast.success(
-                    <>
-                        ✅ Javobingiz to`g`ri! <br /> Siz {level + 1}-bosqichga
-                        o`tdingiz
-                    </>,
-                );
+                setIsContinued(true);
+                toast.success("✅ Javobingiz to`g`ri!");
             } else {
+                setIsFinished(true);
                 toast.success(
-                    <>
-                        🎉 Tabriklaymiz! Siz barcha bosqichlarni muvaffaqiyatli
-                        yakunladingiz!{" "}
-                    </>,
+                    "🎉 Tabriklaymiz! Siz barcha bosqichlarni muvaffaqiyatli yakunladingiz!",
                 );
             }
 
@@ -93,8 +94,8 @@ export default function DeterminantGame() {
                 setTryCount(0);
 
                 const endTime = new Date();
-                // endTime.setHours(endTime.getHours() + 1);
-                endTime.setSeconds(endTime.getSeconds() + 7);
+                endTime.setHours(endTime.getHours() + 1);
+                // endTime.setSeconds(endTime.getSeconds() + 7);
 
                 setTimeoutEndTime(endTime);
                 setIsTimedOut(true);
@@ -166,6 +167,15 @@ export default function DeterminantGame() {
                             handleSubmit={handleSubmit}
                         />
                     </>
+                )}
+
+                {isContinued && <Continue handleContinue={handleContinue} />}
+
+                {isFinished && (
+                    <div className="text-center backdrop-blur-md bg-white/20 p-10 rounded-lg shadow-lg my-8 w-full max-w-4xl font-bold text-2xl">
+                        🎉 Tabriklaymiz! Siz barcha bosqichlarni muvaffaqiyatli
+                        yakunladingiz! 👏
+                    </div>
                 )}
 
                 {isExplained && (
