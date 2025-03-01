@@ -7,22 +7,21 @@ export default function Matrix({ matrix }) {
     }
 
     return (
-        <div className="p-4 mt-4 flex items-center">
+        <div className="p-4 mt-4 flex flex-row flex-wrap md:flex-nowrap items-center justify-center w-full">
             {/* Matrix container */}
-            <div className="relative inline-block">
-                <div className="flex flex-col border-l-2 border-r-2 border-white/50 px-4 py-2">
+            <div className="relative inline-block max-w-xs md:max-w-none">
+                <div className="flex flex-col border-l-2 border-r-2 border-white/50 px-3 py-1">
                     {matrix.map((row, rowIndex) => (
                         <div
                             key={rowIndex}
-                            className="flex justify-center items-center"
-                            style={{ minHeight: "3rem" }} // Ensures each row has a consistent height
+                            className="flex justify-center items-center min-h-10"
                         >
                             {Array.isArray(row) ? (
                                 // Handle 2D array
                                 row.map((num, colIndex) => (
                                     <div
                                         key={colIndex}
-                                        className="mx-4 my-2 text-4xl flex items-center justify-center"
+                                        className="md:mx-4 mx-2 md:my-2 my-1 md:text-4xl text-3xl flex items-center justify-center"
                                         style={{
                                             width: "3rem",
                                             height: "3rem",
@@ -45,9 +44,10 @@ export default function Matrix({ matrix }) {
                 </div>
             </div>
             {/* Equal Sign */}
-            <div className="ml-4 text-5xl font-bold flex items-center h-full">
-                = ❓
-            </div>
+            <div className="mx-4 text-5xl font-bold flex items-center">=</div>
+
+            {/* Question Mark */}
+            <div className="text-5xl font-bold flex items-center">❓</div>
         </div>
     );
 }

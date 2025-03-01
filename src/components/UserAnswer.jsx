@@ -18,14 +18,14 @@ export default function UserAnswer({
 
     return (
         <div className="flex flex-row my-6">
-            <h1 className="text-4xl font-bold">Javob: </h1>
+            <h1 className="text-3xl font-bold">Javob: </h1>
             <input
                 type="number"
                 value={userAnswer}
                 onChange={(e) => setUserAnswer(e.target.value)}
                 onKeyDown={handleKeyDown}
                 ref={inputRef}
-                className="w-30 mx-15 text-center border-2 border-white/50 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 rounded-md outline-none appearance-none"
+                className="w-30 md:mx-15 mx-6 text-center border-2 border-white/50 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 rounded-md outline-none appearance-none"
                 style={{ MozAppearance: "textfield" }}
             />
             <button
