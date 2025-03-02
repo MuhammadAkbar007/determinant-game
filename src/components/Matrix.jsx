@@ -44,10 +44,14 @@ export default function Matrix({ matrix }) {
                 </div>
             </div>
             {/* Equal Sign */}
-            <div className="mx-4 text-5xl font-bold flex items-center">=</div>
+            <div className="mx-2 md:mx-4 text-5xl font-bold flex items-center">
+                =
+            </div>
 
             {/* Question Mark */}
-            <div className="text-5xl font-bold flex items-center">❓</div>
+            <div className="text-4xl md:text-5xl font-bold flex items-center">
+                ❓
+            </div>
         </div>
     );
 }
