@@ -48,11 +48,11 @@ export default function Explanation({ matrix, correctAnswer }) {
                 <h2 className="text-2xl font-bold mb-4">Hisoblash</h2>
                 <div className="text-xl">
                     <p className="mb-2">
-                        det(A) = {formatNumber(a)} × {formatNumber(d)} -{" "}
-                        {formatNumber(b)} × {formatNumber(c)}
+                        det(A) = {a} × {formatNumber(d)} - {formatNumber(b)} ×{" "}
+                        {formatNumber(c)}
                     </p>
                     <p className="mb-2">
-                        det(A) = {formatNumber(a * d)} - {formatNumber(b * c)}
+                        det(A) = {a * d} - {formatNumber(b * c)}
                     </p>
                     <p className="font-bold mb-2">det(A) = {a * d - b * c}</p>
                 </div>
