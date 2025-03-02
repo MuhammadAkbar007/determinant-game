@@ -17,7 +17,7 @@ export const getRandomInt = (min, max) => {
  * @param {number} max - Maximum value for random numbers
  * @returns {Array<Array<number>>} Random matrix
  */
-export const generateRandomMatrix = (n, min = -99, max = 99) => {
+export const generateRandomMatrix = (n, min = -10, max = 10) => {
     const matrix = [];
     for (let i = 0; i < n; i++) {
         const row = [];

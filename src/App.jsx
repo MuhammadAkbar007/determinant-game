@@ -141,6 +141,10 @@ export default function App() {
             <GradientBackground />
 
             <div className="relative flex flex-col items-center justify-center p-4 text-white text-center">
+                <p className="mb-4 text-yellow-400 text-lg md:text-xl">
+                    <i>Tuzuvchi: A. Rahmanov</i>
+                </p>
+
                 <Header level={level} tryCount={tryCount} />
 
                 <Matrix matrix={matrix} />
