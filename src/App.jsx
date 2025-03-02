@@ -82,7 +82,7 @@ export default function App() {
             } else {
                 setIsFinished(true);
                 toast.success(
-                    "🎉 Tabriklaymiz! Siz barcha bosqichlarni muvaffaqiyatli yakunladingiz!",
+                    "🎉 Tabriklayman! Siz barcha bosqichlarni muvaffaqiyatli yakunladingiz!",
                 );
             }
 
@@ -173,7 +173,7 @@ export default function App() {
 
                 {isFinished && (
                     <div className="text-center backdrop-blur-md bg-white/20 p-10 rounded-lg shadow-lg my-8 w-full max-w-4xl font-bold text-2xl">
-                        🎉 Tabriklaymiz! Siz barcha bosqichlarni muvaffaqiyatli
+                        🎉 Tabriklayman! Siz barcha bosqichlarni muvaffaqiyatli
                         yakunladingiz! 👏
                     </div>
                 )}
