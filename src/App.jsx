@@ -94,7 +94,8 @@ export default function App() {
                 setTryCount(0);
 
                 const endTime = new Date();
-                endTime.setHours(endTime.getHours() + 1);
+                // endTime.setHours(endTime.getHours() + 1);
+                endTime.setMinutes(endTime.getMinutes() + 20);
                 // endTime.setSeconds(endTime.getSeconds() + 7);
 
                 setTimeoutEndTime(endTime);
